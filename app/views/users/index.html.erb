@@ -1,0 +1,58 @@
+<div ng-app="myapplication" ng-controller="Demo as d">
+	
+	<input type='text' ng-model='sign_in_user_email' ng-show='!flag_for_sign_in' />
+	<input type='password' ng-model='sign_in_user_password' ng-show='!flag_for_sign_in' />
+	<input type='button' value="submit" ng-click='sign_in_function()' ng-show='!flag_for_sign_in'/>
+	<h1>Listing users <%#= current_user.first_name %></h1>
+
+	<table>
+	  <tr>
+		<th>First name</th>
+		<th>Last name</th>
+		<th>Email</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	  </tr>
+
+	
+	  <tr ng-repeat="user in alluser">
+	    <td> {{ user.first_name }} </td>
+		<td>{{ user.last_name }}</td>
+		<td>{{ user.email }}</td>
+		<td><a href='' ng-click='showuser(user.id)'>Show</a></td>
+		<td><a href='' ng-click='edituser(user.id)'>Edit</a></td>
+		<td><a href='' ng-click='deleteuser(user.id)'>Delete</a></td>
+		</tr>
+	
+	</table><br />
+
+	
+
+	<div>
+		<h3>Show Section</h3>
+		
+		<p><b>First name:</b>{{ user.first_name }}</p>
+		<p><b>Last name:</b>{{ user.last_name }}</p>
+		<p><b>Email:</b>{{ user.email }}</p>
+		<p><button ng-click="clearShowSection()"> Clear </button></p>
+	
+	</div>
+	
+	
+	<div class="update_section">
+		
+		<form name="myForm" class="my-form">
+			<p><b>First name:</b><input type='text' ng-model='user_edit.first_name'></p>
+			<p><b>Last name:</b><input type='text' ng-model='user_edit.last_name'></p>
+			<p><b>Email:</b><input type='text' ng-model='user_edit.email'></p>
+			<p><button type='submit' ng-click='update_user(user_edit.id)'>submit</button></p>
+		</form>
+	</div>
+	
+	<%= link_to 'New User', new_user_path %>
+	<%#= link_to 'Logout', destroy_user_session_path, :method => "delete" %>
+	<%= link_to 'Logout', '' ,:'ng-click' => 'sign_out_function()' %>
+	
+	<input type='button' value="Check for Sign In" ng-click='check_for_sign_in()'>
+</div>
